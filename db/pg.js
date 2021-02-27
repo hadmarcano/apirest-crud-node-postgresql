@@ -17,7 +17,20 @@ const pool = new Pool({
 
   try {
     await client.query("BEGIN");
+
+    const Users = `CREATE TABLE IF NOT EXIST users(
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(40),
+        email TEXT
+        )`;
+
+    await client.query(Users, []);
+
+    await client.query("COMMIT");
   } catch (error) {
-    console.log(error);
+    await client("ROLLBACK");
+    throw error;
   }
 });
+
+module.exports = pool;
