@@ -5,10 +5,11 @@ const router = Router();
 
 const {
   getUser,
-  createUser,
+  // createUser,
   getUserById,
   deleteUser,
   updateUser,
+  usersControllers,
 } = require("../middlewares/user");
 
 // routers
@@ -17,7 +18,7 @@ router.get("/users", getUser);
 
 router.get("/users/:id", getUserById);
 
-router.post("/users", createUser);
+router.post("/users", usersControllers.createOne);
 
 router.delete("/users/:id", deleteUser);
 
